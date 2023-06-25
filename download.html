@@ -4,39 +4,47 @@
   <title>Enviar datos a Discord</title>
   <style>
     body {
-      background-color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      background-color: #F5F5F5;
       font-family: Arial, sans-serif;
     }
 
     .container {
       text-align: center;
+      margin: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
     }
 
     .input-field {
       background-color: #E0F2F1;
       border: none;
-      padding: 10px;
-      margin-bottom: 10px;
-      width: 300px;
-      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 20px;
+      width: 100%;
+      border-radius: 10px;
+      font-size: 16px;
     }
 
     .button {
-      background-color: #B2EBF2;
+      background-color: #4FC3F7;
       border: none;
-      color: white;
-      padding: 10px 20px;
+      color: #FFFFFF;
+      padding: 15px 40px;
       text-align: center;
       text-decoration: none;
       display: inline-block;
-      font-size: 16px;
-      margin-bottom: 10px;
+      font-size: 18px;
+      margin-bottom: 20px;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #29B6F6;
     }
 
     .loading-button {
@@ -61,6 +69,12 @@
       }
       100% {
         transform: rotate(360deg);
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      .container {
+        margin: 10px;
       }
     }
   </style>
@@ -90,15 +104,10 @@
         body: JSON.stringify(data)
       })
       .then(function(response) {
-        if (response.ok) {
-          alert("Los datos se enviaron correctamente a Discord.");
-        } else {
-          alert("Hubo un error al enviar los datos a Discord.");
-        }
+        console.log("Los datos se enviaron correctamente a Discord.");
       })
       .catch(function(error) {
         console.error("Error en la solicitud:", error);
-        alert("Hubo un error al enviar los datos a Discord.");
       });
 
       // Simulación de carga para animar el botón
@@ -114,7 +123,7 @@
         if (progress === 99) {
           clearInterval(interval);
         }
-      }, 50);
+      }, 100);
     }
 
     var downloadButton = document.getElementById("download-button");
@@ -122,4 +131,3 @@
   </script>
 </body>
 </html>
-
