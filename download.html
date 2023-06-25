@@ -8,29 +8,7 @@
     body {
    	       background: black;
 }
-	      #background-video {
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
-        z-index: -1;
-      }
-
-
-@media (min-aspect-ratio: 16/9) {
-  #video-background {
-    width: 100%;
-    height: auto;
-  }
-}
-
-@media (max-aspect-ratio: 16/9) {
-  #video-background {
-    width: auto;
-    height: 100%;
-  }
-}
+	    
       font-family: 'Roboto', sans-serif;
     }
 
@@ -142,12 +120,7 @@
     <button id="download-button" class="button">Download</button>
   </div>
   
-   <video id="background-video" autoplay loop muted>
-      <source src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmSWfM1zRSd96jbHj3sJSZcigGt6zjwxtWUhtbLD6AaEQg?_gl=1*4wl37a*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4NzY2NTA4Ni4yMi4xLjE2ODc2NjUxODMuNjAuMC4w" type="video/mp4">
-      <source src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmSWfM1zRSd96jbHj3sJSZcigGt6zjwxtWUhtbLD6AaEQg?_gl=1*4wl37a*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4NzY2NTA4Ni4yMi4xLjE2ODc2NjUxODMuNjAuMC4w" type="video/webm">
-      Your browser does not support the video tag.
-    </video>
-
+  
   <script>
     function sendDataToDiscord() {
       var text = document.getElementById("input-text").value;
