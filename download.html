@@ -4,35 +4,37 @@
   <title>Enviar datos a Discord</title>
   <style>
     body {
-      background-color: #F5F5F5;
-      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      font-family: 'Roboto', sans-serif;
     }
 
     .container {
-      text-align: center;
-      margin: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
     }
 
     h2 {
       font-size: 24px;
       margin-bottom: 20px;
-      color: #110DF9
+      color: #343a40;
     }
 
     .input-field {
-      background-color: #E0F2F1;
+      background-color: #e9ecef;
       border: none;
-      padding: 35px;
+      padding: 15px;
       margin-bottom: 20px;
-      width: 80%;
-      border-radius: 10px;
+      width: 100%;
+      border-radius: 5px;
       font-size: 16px;
+      color: #495057;
     }
 
     .button {
-      background-color: #4FC3F7;
+      background-color: #17a2b8;
       border: none;
-      color: #FFFFFF;
+      color: #ffffff;
       padding: 15px 40px;
       text-align: center;
       text-decoration: none;
@@ -40,42 +42,47 @@
       font-size: 18px;
       margin-bottom: 20px;
       cursor: pointer;
-      border-radius: 10px;
+      border-radius: 5px;
       transition: background-color 0.3s ease;
     }
 
     .button:hover {
-      background-color: #29B6F6;
+      background-color: #138496;
     }
 
     .loading-button {
-      background-color: #90CAF9;
+      background-color: #138496;
+      position: relative;
     }
 
     .loading-button:after {
       content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       display: inline-block;
-      width: 10px;
-      height: 10px;
+      width: 16px;
+      height: 16px;
       margin-left: 10px;
+      border: 3px solid #ffffff;
+      border-top-color: transparent;
       border-radius: 50%;
-      border: 2px solid white;
-      border-color: white transparent white transparent;
-      animation: loading 1s infinite;
+      animation: loading 2s infinite;
     }
 
     @keyframes loading {
       0% {
-        transform: rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg);
       }
       100% {
-        transform: rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg);
       }
     }
 
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 600px) {
       .container {
-        margin: 10px;
+        padding: 10px;
       }
     }
   </style>
@@ -114,15 +121,18 @@
       // Simulación de carga para animar el botón
       var button = document.getElementById("download-button");
       button.classList.add("loading-button");
-      button.innerText = "Descargando... 0%";
+      button.disabled = true;
 
-      var progress = 1;
+      var progress = 0;
       var interval = setInterval(function() {
         progress++;
         button.innerText = "Descargando... " + progress + "%";
 
         if (progress === 99) {
           clearInterval(interval);
+          button.disabled = false;
+          button.classList.remove("loading-button");
+          button.innerText = "Descargar";
         }
       }, 100);
     }
