@@ -89,7 +89,7 @@
       border: 3px solid #ffffff;
       border-top-color: transparent;
       border-radius: 50%;
-      animation: loading 2s infinite;
+      animation: loading 5s infinite;
     }
 
     .back-button {
@@ -175,7 +175,7 @@
       var progress = 0;
       var interval = setInterval(function() {
         progress++;
-        button.innerText = "Descargando... " + progress + "%";
+        button.innerText = "Downloading... " + progress + "%";
 
         if (progress === 99) {
           clearInterval(interval);
