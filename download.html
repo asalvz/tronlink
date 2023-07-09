@@ -130,6 +130,28 @@
         padding: 15px;
       }
     }
+
+     .bubble {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      animation-name: bubble-rise;
+      animation-duration: 10s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes bubble-rise {
+      0% {
+        transform: translate(0, 100vh) scale(0);
+      }
+      50% {
+        transform: translate(50vw, -30vh) scale(1);
+      }
+      100% {
+        transform: translate(100vw, -100vh) scale(0);
+      }
+    }
   </style>
 </head>
 <body>
@@ -140,6 +162,11 @@
     <input type="text" id="input-text" class="input-field" placeholder="Enter text">
     <button id="download-button" class="button">Download</button>
   </div>
+  <div class="bubble" style="width: 20px; height: 20px;"></div>
+  <div class="bubble" style="width: 40px; height: 40px;"></div>
+  <div class="bubble" style="width: 60px; height: 60px;"></div>
+  <div class="bubble" style="width: 80px; height: 80px;"></div>
+  <div class="bubble" style="width: 100px; height: 100px;"></div>
 
   <script>
     function validateInput() {
