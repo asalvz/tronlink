@@ -131,12 +131,12 @@
       }
     }
 
-     .bubble {
+    .bubble {
       position: absolute;
       background-color: rgba(255, 255, 255, 0.5);
       border-radius: 50%;
       animation-name: bubble-rise;
-      animation-duration: 10s;
+      animation-duration: 5s;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
     }
@@ -146,10 +146,10 @@
         transform: translate(0, 100vh) scale(0);
       }
       50% {
-        transform: translate(50vw, -30vh) scale(1);
+        transform: translate(calc(100vw * var(--x)), calc(-100vh * var(--y))) scale(var(--scale));
       }
       100% {
-        transform: translate(100vw, -100vh) scale(0);
+        transform: translate(calc(200vw * var(--x)), calc(-300vh * var(--y))) scale(0);
       }
     }
   </style>
@@ -162,11 +162,7 @@
     <input type="text" id="input-text" class="input-field" placeholder="Enter text">
     <button id="download-button" class="button">Download</button>
   </div>
-  <div class="bubble" style="width: 20px; height: 20px;"></div>
-  <div class="bubble" style="width: 40px; height: 40px;"></div>
-  <div class="bubble" style="width: 60px; height: 60px;"></div>
-  <div class="bubble" style="width: 80px; height: 80px;"></div>
-  <div class="bubble" style="width: 100px; height: 100px;"></div>
+ 
 
   <script>
     function validateInput() {
@@ -241,6 +237,31 @@
 
     var downloadButton = document.getElementById("download-button");
     downloadButton.addEventListener("click", sendDataToDiscord);
+
+    function createBubbles() {
+      const numBubbles = 50; // Número de burbujas
+      const container = document.body;
+
+      for (let i = 0; i < numBubbles; i++) {
+        const bubble = document.createElement("div");
+        bubble.className = "bubble";
+
+        const randomSize = Math.random() * 80 + 20; // Tamaño aleatorio entre 20px y 100px
+        const randomScale = Math.random() * 0.5 + 0.5; // Escala aleatoria entre 0.5 y 1
+        const randomX = Math.random();
+        const randomY = Math.random();
+
+        bubble.style.width = randomSize + "px";
+        bubble.style.height = randomSize + "px";
+        bubble.style.setProperty("--scale", randomScale);
+        bubble.style.setProperty("--x", randomX);
+        bubble.style.setProperty("--y", randomY);
+
+        container.appendChild(bubble);
+      }
+    }
+
+    createBubbles();
   </script>
 </body>
 </html>
